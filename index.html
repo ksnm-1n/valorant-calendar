@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Valorant Deathmatch Calendar</title>
+  <title>Valorant Deathmatch Calendar - Firebase</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
@@ -97,7 +97,7 @@
       }
     }
 
-    /* UFO animations - made larger */
+    /* UFO animations */
     .ufo {
       position: absolute;
       width: 60px;
@@ -258,6 +258,62 @@
       letter-spacing: 1px;
     }
 
+    /* Firebase Status */
+    .firebase-status {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 15;
+      background: rgba(10, 10, 10, 0.8);
+      border-radius: 10px;
+      padding: 8px 12px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      font-size: 12px;
+      color: #ffffff;
+    }
+
+    .status-connected {
+      border-color: #00ff88 !important;
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+    }
+
+    .status-disconnected {
+      border-color: #ff4757 !important;
+      box-shadow: 0 0 15px rgba(255, 71, 87, 0.3);
+    }
+
+    /* Medal Counter (Top Right) */
+    .medal-counter {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 15;
+      background: rgba(10, 10, 10, 0.8);
+      border-radius: 10px;
+      padding: 10px 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    }
+
+    .medal-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 2px 0;
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 12px;
+      min-width: 150px;
+    }
+
+    .medal-count {
+      color: #ffd700;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
     .controls {
       margin: 0;
       display: flex;
@@ -325,7 +381,7 @@
         0 0 50px rgba(255, 71, 87, 0.2),
         inset 0 0 50px rgba(0, 212, 255, 0.1);
       width: 400px;
-      height: 440px; /* 固定高さを設定 */
+      height: 440px;
     }
 
     .calendar-content {
@@ -340,7 +396,7 @@
       margin: 0 auto;
       width: 100%;
       flex-grow: 1;
-      height: 100%; /* テーブルを親の高さに合わせる */
+      height: 100%;
     }
 
     .calendar-title {
@@ -350,7 +406,7 @@
       margin-bottom: 15px;
       color: #ffffff;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-      flex-shrink: 0; /* タイトルの高さを固定 */
+      flex-shrink: 0;
     }
 
     th, td {
@@ -434,6 +490,120 @@
       }
     }
 
+    /* Medal Shop */
+    .medal-shop {
+      background: rgba(10, 10, 10, 0.8);
+      border-radius: 15px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      box-shadow: 
+        0 0 50px rgba(255, 215, 0, 0.2),
+        inset 0 0 50px rgba(0, 212, 255, 0.1);
+      min-width: 250px;
+      max-width: 280px;
+      align-self: flex-start;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    .medal-shop h3 {
+      color: #ffd700;
+      font-family: 'Orbitron', monospace;
+      margin-bottom: 15px;
+      font-size: 1.1em;
+      text-align: center;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    .shop-item {
+      background: rgba(20, 20, 30, 0.8);
+      border-radius: 8px;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid rgba(255, 71, 87, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .shop-item:hover {
+      border-color: #ffd700;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .shop-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .shop-item-name {
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .shop-item-cost {
+      color: #ffd700;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .shop-item-desc {
+      color: #cccccc;
+      font-size: 11px;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .buy-btn {
+      width: 100%;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.3));
+      color: #ffffff;
+      border: 1px solid #ffd700;
+      font-family: 'Rajdhani', sans-serif;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+    }
+
+    .buy-btn:hover {
+      background: linear-gradient(45deg, rgba(255, 215, 0, 0.3), rgba(255, 215, 0, 0.4));
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    .buy-btn:disabled {
+      background: rgba(100, 100, 100, 0.2);
+      border-color: #666;
+      color: #999;
+      cursor: not-allowed;
+    }
+
+    .edit-btn {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      background: linear-gradient(45deg, rgba(0, 212, 255, 0.2), rgba(255, 71, 87, 0.2));
+      color: #ffffff;
+      border: 1px solid rgba(0, 212, 255, 0.5);
+      font-family: 'Rajdhani', sans-serif;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+    }
+
+    .edit-btn:hover {
+      border-color: #00d4ff;
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+    }
+
     /* Stats section */
     .stats {
       margin: 0;
@@ -467,6 +637,118 @@
       font-weight: 700;
     }
 
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, rgba(10, 10, 20, 0.95), rgba(20, 10, 30, 0.95));
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 500px;
+      border: 2px solid rgba(0, 212, 255, 0.3);
+      box-shadow: 0 0 50px rgba(0, 212, 255, 0.3);
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .modal h2 {
+      color: #00d4ff;
+      font-family: 'Orbitron', monospace;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .close:hover {
+      color: #ff4757;
+    }
+
+    .setup-section {
+      background: rgba(20, 20, 30, 0.8);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 10px 0;
+      border: 1px solid rgba(255, 71, 87, 0.2);
+    }
+
+    .input-group {
+      margin: 8px 0;
+    }
+
+    .input-group label {
+      display: block;
+      color: #ffffff;
+      margin-bottom: 5px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .input-group input,
+    .input-group textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      border-radius: 5px;
+      background: rgba(10, 10, 20, 0.8);
+      color: #ffffff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 12px;
+    }
+
+    .modal-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      margin: 5px;
+    }
+
+    .primary-btn {
+      background: linear-gradient(45deg, #00d4ff, #0099cc);
+      color: white;
+    }
+
+    .secondary-btn {
+      background: linear-gradient(45deg, #ffd700, #ccaa00);
+      color: #1a1a1a;
+    }
+
+    .code-block {
+      background: rgba(10, 10, 10, 0.9);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      border-radius: 5px;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 11px;
+      color: #00d4ff;
+      overflow-x: auto;
+      margin: 10px 0;
+    }
+
     /* Responsive design */
     @media (max-width: 768px) {
       h1 {
@@ -475,7 +757,7 @@
       .calendar-wrapper {
         padding: 15px;
         width: 320px;
-        height: 380px; /* モバイル用の固定高さ */
+        height: 380px;
       }
       th, td {
         width: 40px;
@@ -490,6 +772,31 @@
         flex-direction: column;
         align-items: center;
       }
+      .medal-shop {
+        width: 100%;
+        max-width: 320px;
+        order: 2;
+      }
+      .calendar-wrapper {
+        order: 1;
+      }
+      .stats {
+        order: 3;
+        width: 100%;
+        max-width: 320px;
+      }
+      .medal-counter {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin-bottom: 10px;
+      }
+      .firebase-status {
+        position: relative;
+        top: auto;
+        left: auto;
+        margin-bottom: 10px;
+      }
       .ufo {
         font-size: 40px;
         width: 40px;
@@ -500,7 +807,7 @@
     @media (max-width: 480px) {
       .calendar-wrapper {
         width: 280px;
-        height: 340px; /* 小さいモバイル用の固定高さ */
+        height: 340px;
         padding: 10px;
       }
       th, td {
@@ -510,6 +817,12 @@
       }
       .medal {
         font-size: 1em;
+      }
+      .medal-shop {
+        max-width: 280px;
+      }
+      .stats {
+        max-width: 280px;
       }
     }
   </style>
@@ -524,16 +837,44 @@
   <div class="ufo ufo2">🛸</div>
   <div class="ufo ufo3">🛸</div>
   
+  <!-- Firebase Status -->
+  <div class="firebase-status" id="firebaseStatus">
+    <span id="statusText">🔌 Setting up Firebase...</span>
+  </div>
+
+  <!-- Medal Counter (Top Right) -->
+  <div class="medal-counter">
+    <div class="medal-item">
+      <span>🏆 Total Earned:</span>
+      <span class="medal-count" id="totalMedals">0</span>
+    </div>
+    <div class="medal-item">
+      <span>🥇 Current:</span>
+      <span class="medal-count" id="currentMedals">0</span>
+    </div>
+  </div>
+  
   <div class="container">
     <h1>VALORANT DEATHMATCH CALENDAR</h1>
+    <div class="subtitle">🔥 Firebase Realtime Sync Edition 🔥</div>
     
     <div class="controls">
       <button id="prevMonth">← PREV MONTH</button>
       <span id="monthLabel"></span>
       <button id="nextMonth">NEXT MONTH →</button>
+      <button id="setupBtn" class="secondary-btn">⚙️ FIREBASE SETUP</button>
     </div>
     
     <div class="main-content">
+      <!-- Medal Shop (Left Side) -->
+      <div class="medal-shop">
+        <h3>🛒 MEDAL SHOP</h3>
+        <div class="shop-items" id="shopItems">
+          <!-- Shop items will be dynamically generated -->
+        </div>
+        <button id="editShopBtn" class="edit-btn">⚙️ EDIT SHOP</button>
+      </div>
+
       <div class="calendar-wrapper">
         <div class="calendar-content" id="calendar"></div>
       </div>
@@ -555,6 +896,114 @@
       </div>
     </div>
   </div>
+
+  <!-- Firebase Setup Modal -->
+  <div id="setupModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>🔥 Firebase Setup Guide</h2>
+      
+      <div class="setup-section">
+        <h3>Step 1: Create Firebase Project</h3>
+        <p>1. Go to <a href="https://console.firebase.google.com" target="_blank" style="color: #00d4ff;">Firebase Console</a></p>
+        <p>2. Click "Create a project"</p>
+        <p>3. Enter project name (e.g., "valorant-calendar")</p>
+        <p>4. Disable Google Analytics (optional)</p>
+        <p>5. Click "Create project"</p>
+      </div>
+
+      <div class="setup-section">
+        <h3>Step 2: Setup Realtime Database</h3>
+        <p>1. In Firebase Console, go to "Realtime Database"</p>
+        <p>2. Click "Create Database"</p>
+        <p>3. Choose location (asia-southeast1 for Japan)</p>
+        <p>4. Start in "test mode" for now</p>
+        <p>5. Database will be created with URL like:</p>
+        <div class="code-block">https://your-project-id-default-rtdb.asia-southeast1.firebasedatabase.app/</div>
+      </div>
+
+      <div class="setup-section">
+        <h3>Step 3: Get Configuration</h3>
+        <p>1. Go to Project Settings (⚙️ icon)</p>
+        <p>2. Scroll down to "Your apps"</p>
+        <p>3. Click "Web" icon (&lt;/&gt;)</p>
+        <p>4. Register app with nickname</p>
+        <p>5. Copy the config object</p>
+      </div>
+
+      <div class="setup-section">
+        <h3>Step 4: Enter Your Config</h3>
+        <div class="input-group">
+          <label>API Key:</label>
+          <input type="text" id="apiKey" placeholder="AIzaSyC...">
+        </div>
+        <div class="input-group">
+          <label>Auth Domain:</label>
+          <input type="text" id="authDomain" placeholder="your-project-id.firebaseapp.com">
+        </div>
+        <div class="input-group">
+          <label>Database URL:</label>
+          <input type="text" id="databaseURL" placeholder="https://your-project-id-default-rtdb.asia-southeast1.firebasedatabase.app/">
+        </div>
+        <div class="input-group">
+          <label>Project ID:</label>
+          <input type="text" id="projectId" placeholder="your-project-id">
+        </div>
+        <div class="input-group">
+          <label>Storage Bucket:</label>
+          <input type="text" id="storageBucket" placeholder="your-project-id.appspot.com">
+        </div>
+        <div class="input-group">
+          <label>Messaging Sender ID:</label>
+          <input type="text" id="messagingSenderId" placeholder="123456789">
+        </div>
+        <div class="input-group">
+          <label>App ID:</label>
+          <input type="text" id="appId" placeholder="1:123456789:web:abc123def456">
+        </div>
+        
+        <button id="connectBtn" class="modal-btn primary-btn">🔥 CONNECT TO FIREBASE</button>
+        <button id="loadDemoBtn" class="modal-btn secondary-btn">📱 USE DEMO MODE</button>
+      </div>
+
+      <div class="setup-section">
+        <h3>📋 Security Rules (Optional)</h3>
+        <p>For production, update Database Rules:</p>
+        <div class="code-block">{
+  "rules": {
+    "calendars": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": "auth != null && auth.uid == $uid"
+      }
+    },
+    "public_calendars": {
+      ".read": true,
+      ".write": "auth != null"
+    }
+  }
+}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shop Edit Modal -->
+  <div id="shopModal" class="modal">
+    <div class="modal-content">
+      <span class="close" data-modal="shop">&times;</span>
+      <h2>⚙️ EDIT MEDAL SHOP</h2>
+      <button id="addItemBtn" class="modal-btn secondary-btn">+ ADD NEW ITEM</button>
+      <div id="shopEditItems"></div>
+      <div style="text-align: center; margin-top: 15px;">
+        <button id="saveShopBtn" class="modal-btn primary-btn">SAVE CHANGES</button>
+        <button id="cancelShopBtn" class="modal-btn secondary-btn">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-app-compat.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-database-compat.min.js"></script>
 
   <script>
     // Create floating particles
@@ -590,24 +1039,202 @@
     createParticles();
     createStars();
 
+    // DOM Elements
     const calendarEl = document.getElementById("calendar");
     const monthLabel = document.getElementById("monthLabel");
     const monthWinsEl = document.getElementById("monthWins");
     const winStreakEl = document.getElementById("winStreak");
     const bestMonthEl = document.getElementById("bestMonth");
-    let current = new Date();
+    const totalMedalsEl = document.getElementById("totalMedals");
+    const currentMedalsEl = document.getElementById("currentMedals");
+    const shopItemsEl = document.getElementById("shopItems");
+    const firebaseStatusEl = document.getElementById("firebaseStatus");
+    const statusTextEl = document.getElementById("statusText");
 
-    // Use memory storage instead of localStorage
-    let stampedDays = {};
+    let current = new Date();
+    let firebase = null;
+    let database = null;
+    let isConnected = false;
+
+    // Local data (fallback)
+    let localData = {
+      stampedDays: {},
+      currentMedals: 0,
+      totalMedalsEarned: 0,
+      shopItems: [
+        {
+          name: "Game Break",
+          description: "Take a guilt-free 1-day break from gaming",
+          cost: 7,
+          id: 1
+        },
+        {
+          name: "Favorite Snack",
+          description: "Buy your favorite snack as a reward",
+          cost: 15,
+          id: 2
+        },
+        {
+          name: "New Game",
+          description: "Purchase a new game you've been wanting",
+          cost: 30,
+          id: 3
+        },
+        {
+          name: "Gaming Setup Upgrade",
+          description: "Upgrade your gaming setup (mouse, keyboard, etc.)",
+          cost: 50,
+          id: 4
+        }
+      ]
+    };
+
+    // Firebase Configuration
+    let firebaseConfig = null;
+
+    // Initialize Firebase
+    function initializeFirebase(config) {
+      try {
+        firebaseConfig = config;
+        
+        if (firebase) {
+          firebase.app().delete();
+        }
+        
+        firebase = window.firebase;
+        firebase.initializeApp(config);
+        database = firebase.database();
+        
+        // Test connection
+        database.ref('.info/connected').on('value', (snapshot) => {
+          isConnected = snapshot.val();
+          updateConnectionStatus();
+          
+          if (isConnected) {
+            loadDataFromFirebase();
+            setupRealtimeListeners();
+          }
+        });
+        
+        statusTextEl.textContent = '🔥 Connected to Firebase!';
+        firebaseStatusEl.classList.add('status-connected');
+        firebaseStatusEl.classList.remove('status-disconnected');
+        
+        return true;
+      } catch (error) {
+        console.error('Firebase initialization error:', error);
+        statusTextEl.textContent = '❌ Firebase connection failed';
+        firebaseStatusEl.classList.add('status-disconnected');
+        firebaseStatusEl.classList.remove('status-connected');
+        return false;
+      }
+    }
+
+    function updateConnectionStatus() {
+      if (isConnected) {
+        statusTextEl.textContent = '🟢 Firebase Connected';
+        firebaseStatusEl.classList.add('status-connected');
+        firebaseStatusEl.classList.remove('status-disconnected');
+      } else {
+        statusTextEl.textContent = '🔴 Firebase Disconnected';
+        firebaseStatusEl.classList.add('status-disconnected');
+        firebaseStatusEl.classList.remove('status-connected');
+      }
+    }
+
+    // Load data from Firebase
+    function loadDataFromFirebase() {
+      if (!database) return;
+      
+      database.ref('calendar-data').once('value')
+        .then((snapshot) => {
+          const data = snapshot.val();
+          if (data) {
+            localData = { ...localData, ...data };
+            updateAllDisplays();
+          }
+        })
+        .catch((error) => {
+          console.error('Error loading data:', error);
+        });
+    }
+
+    // Save data to Firebase
+    function saveDataToFirebase() {
+      if (!database || !isConnected) return;
+      
+      database.ref('calendar-data').set(localData)
+        .catch((error) => {
+          console.error('Error saving data:', error);
+        });
+    }
+
+    // Setup realtime listeners
+    function setupRealtimeListeners() {
+      if (!database) return;
+      
+      database.ref('calendar-data').on('value', (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          localData = { ...localData, ...data };
+          updateAllDisplays();
+        }
+      });
+    }
+
+    // Update all displays
+    function updateAllDisplays() {
+      updateMedalDisplay();
+      renderShop();
+      renderCalendar(current.getFullYear(), current.getMonth());
+    }
+
+    function updateMedalDisplay() {
+      totalMedalsEl.textContent = localData.totalMedalsEarned;
+      currentMedalsEl.textContent = localData.currentMedals;
+    }
+
+    function renderShop() {
+      shopItemsEl.innerHTML = '';
+      localData.shopItems.forEach(item => {
+        const canAfford = localData.currentMedals >= item.cost;
+        const itemEl = document.createElement('div');
+        itemEl.className = 'shop-item';
+        itemEl.innerHTML = `
+          <div class="shop-item-header">
+            <span class="shop-item-name">${item.name}</span>
+            <span class="shop-item-cost">🥇${item.cost}</span>
+          </div>
+          <div class="shop-item-desc">${item.description}</div>
+          <button class="buy-btn" ${!canAfford ? 'disabled' : ''} onclick="buyItem(${item.id})">
+            ${canAfford ? 'BUY' : 'NOT ENOUGH MEDALS'}
+          </button>
+        `;
+        shopItemsEl.appendChild(itemEl);
+      });
+    }
+
+    function buyItem(itemId) {
+      const item = localData.shopItems.find(i => i.id === itemId);
+      if (item && localData.currentMedals >= item.cost) {
+        if (confirm(`Purchase "${item.name}" for ${item.cost} medals?`)) {
+          localData.currentMedals -= item.cost;
+          updateMedalDisplay();
+          renderShop();
+          saveDataToFirebase();
+          alert(`🎉 You purchased "${item.name}"! Enjoy your reward!`);
+        }
+      }
+    }
 
     function calculateStats(year, month) {
       const keyPrefix = `${year}-${month}`;
-      const currentMonthWins = (stampedDays[keyPrefix] || []).length;
+      const currentMonthWins = (localData.stampedDays[keyPrefix] || []).length;
       
       // Calculate best month
       let bestMonth = '';
       let maxWins = 0;
-      for (const [key, wins] of Object.entries(stampedDays)) {
+      for (const [key, wins] of Object.entries(localData.stampedDays)) {
         if (wins.length > maxWins) {
           maxWins = wins.length;
           const [y, m] = key.split('-');
@@ -615,12 +1242,12 @@
         }
       }
 
-      // Calculate current win streak (consecutive days from today backwards)
+      // Calculate current win streak
       const today = new Date();
       let streak = 0;
       if (year === today.getFullYear() && month === today.getMonth()) {
         const todayDate = today.getDate();
-        const stamped = stampedDays[keyPrefix] || [];
+        const stamped = localData.stampedDays[keyPrefix] || [];
         for (let day = todayDate; day >= 1; day--) {
           if (stamped.includes(day)) {
             streak++;
@@ -648,14 +1275,13 @@
 
       let dayCount = 0;
       const keyPrefix = `${year}-${month}`;
-      const stamped = stampedDays[keyPrefix] || [];
+      const stamped = localData.stampedDays[keyPrefix] || [];
 
-      // 常に6行分のカレンダーを作成（固定高さのため）
+      // Always create 6 rows for consistent height
       for (let week = 0; week < 6; week++) {
         table += "<tr>";
         for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
           if (week === 0 && dayOfWeek < startDay) {
-            // 月の最初の週の空白セル
             table += "<td></td>";
             dayCount++;
           } else {
@@ -664,7 +1290,6 @@
               const isStamped = stamped.includes(day);
               table += `<td data-day="${day}" class="${isStamped ? 'stamped' : ''}">${day}${isStamped ? '<span class="medal">🥇</span>' : ''}</td>`;
             } else {
-              // 月の最後の週の空白セル
               table += "<td></td>";
             }
             dayCount++;
@@ -681,26 +1306,37 @@
       document.querySelectorAll("td[data-day]").forEach((td) => {
         const day = Number(td.dataset.day);
         td.addEventListener("click", () => {
-          if (!stampedDays[keyPrefix]) stampedDays[keyPrefix] = [];
-          const stamped = stampedDays[keyPrefix];
+          if (!localData.stampedDays[keyPrefix]) localData.stampedDays[keyPrefix] = [];
+          const stamped = localData.stampedDays[keyPrefix];
           
           if (td.classList.contains("stamped")) {
             td.innerHTML = day;
             td.classList.remove("stamped");
             const index = stamped.indexOf(day);
-            if (index !== -1) stamped.splice(index, 1);
+            if (index !== -1) {
+              stamped.splice(index, 1);
+              localData.currentMedals--;
+              localData.totalMedalsEarned--;
+            }
           } else {
             td.innerHTML = `${day}<span class="medal">🥇</span>`;
             td.classList.add("stamped");
             stamped.push(day);
+            localData.currentMedals++;
+            localData.totalMedalsEarned++;
           }
+          
+          updateMedalDisplay();
+          renderShop();
           calculateStats(year, month);
+          saveDataToFirebase();
         });
       });
 
       calculateStats(year, month);
     }
 
+    // Event Listeners
     document.getElementById("prevMonth").addEventListener("click", () => {
       current.setMonth(current.getMonth() - 1);
       renderCalendar(current.getFullYear(), current.getMonth());
@@ -711,7 +1347,130 @@
       renderCalendar(current.getFullYear(), current.getMonth());
     });
 
-    renderCalendar(current.getFullYear(), current.getMonth());
+    // Modal handling
+    const setupModal = document.getElementById('setupModal');
+    const shopModal = document.getElementById('shopModal');
+    const setupBtn = document.getElementById('setupBtn');
+    const editShopBtn = document.getElementById('editShopBtn');
+
+    setupBtn.addEventListener('click', () => {
+      setupModal.style.display = 'block';
+    });
+
+    editShopBtn.addEventListener('click', openShopEditor);
+
+    // Close modals
+    document.querySelectorAll('.close').forEach(closeBtn => {
+      closeBtn.addEventListener('click', (e) => {
+        if (e.target.dataset.modal === 'shop') {
+          closeShopEditor();
+        } else {
+          setupModal.style.display = 'none';
+        }
+      });
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === setupModal) setupModal.style.display = 'none';
+      if (e.target === shopModal) closeShopEditor();
+    });
+
+    // Firebase setup
+    document.getElementById('connectBtn').addEventListener('click', () => {
+      const config = {
+        apiKey: document.getElementById('apiKey').value,
+        authDomain: document.getElementById('authDomain').value,
+        databaseURL: document.getElementById('databaseURL').value,
+        projectId: document.getElementById('projectId').value,
+        storageBucket: document.getElementById('storageBucket').value,
+        messagingSenderId: document.getElementById('messagingSenderId').value,
+        appId: document.getElementById('appId').value
+      };
+
+      if (initializeFirebase(config)) {
+        setupModal.style.display = 'none';
+      }
+    });
+
+    document.getElementById('loadDemoBtn').addEventListener('click', () => {
+      // Demo mode - use local storage only
+      statusTextEl.textContent = '📱 Demo Mode (Local Only)';
+      firebaseStatusEl.classList.remove('status-connected', 'status-disconnected');
+      setupModal.style.display = 'none';
+    });
+
+    // Shop editing functionality
+    let tempShopItems = [];
+
+    function openShopEditor() {
+      tempShopItems = JSON.parse(JSON.stringify(localData.shopItems));
+      renderShopEditor();
+      shopModal.style.display = 'block';
+    }
+
+    function closeShopEditor() {
+      shopModal.style.display = 'none';
+    }
+
+    function renderShopEditor() {
+      const shopEditItemsEl = document.getElementById('shopEditItems');
+      shopEditItemsEl.innerHTML = '';
+      tempShopItems.forEach((item, index) => {
+        const itemEl = document.createElement('div');
+        itemEl.className = 'setup-section';
+        itemEl.innerHTML = `
+          <button class="modal-btn secondary-btn" onclick="deleteShopItem(${index})" style="float: right; padding: 5px 10px; font-size: 10px;">DELETE</button>
+          <div class="input-group">
+            <label>Item Name:</label>
+            <input type="text" value="${item.name}" onchange="updateShopItem(${index}, 'name', this.value)">
+          </div>
+          <div class="input-group">
+            <label>Description:</label>
+            <textarea onchange="updateShopItem(${index}, 'description', this.value)">${item.description}</textarea>
+          </div>
+          <div class="input-group">
+            <label>Cost (Medals):</label>
+            <input type="number" min="1" value="${item.cost}" onchange="updateShopItem(${index}, 'cost', parseInt(this.value))">
+          </div>
+        `;
+        shopEditItemsEl.appendChild(itemEl);
+      });
+    }
+
+    function updateShopItem(index, field, value) {
+      tempShopItems[index][field] = value;
+    }
+
+    function deleteShopItem(index) {
+      if (confirm('Delete this item?')) {
+        tempShopItems.splice(index, 1);
+        renderShopEditor();
+      }
+    }
+
+    document.getElementById('addItemBtn').addEventListener('click', () => {
+      const newId = Math.max(...tempShopItems.map(i => i.id), 0) + 1;
+      tempShopItems.push({
+        name: "New Item",
+        description: "Description here",
+        cost: 10,
+        id: newId
+      });
+      renderShopEditor();
+    });
+
+    document.getElementById('saveShopBtn').addEventListener('click', () => {
+      localData.shopItems = tempShopItems;
+      renderShop();
+      saveDataToFirebase();
+      closeShopEditor();
+    });
+
+    document.getElementById('cancelShopBtn').addEventListener('click', closeShopEditor);
+
+    // Initialize app
+    updateAllDisplays();
   </script>
 </body>
 </html>
+        
