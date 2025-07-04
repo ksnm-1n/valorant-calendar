@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Valorant Deathmatch Calendar - Firebase</title>
+  <title>Valorant Deathmatch Calendar</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
@@ -97,7 +97,7 @@
       }
     }
 
-    /* UFO animations */
+    /* UFO animations - made larger */
     .ufo {
       position: absolute;
       width: 60px;
@@ -247,71 +247,6 @@
         background-position: 100% 50%;
         filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.8));
       }
-    }
-
-    .subtitle {
-      font-size: 1.2em;
-      font-weight: 500;
-      margin-bottom: 30px;
-      color: #ffffff;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-      letter-spacing: 1px;
-    }
-
-    /* Firebase Status */
-    .firebase-status {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 15;
-      background: rgba(10, 10, 10, 0.8);
-      border-radius: 10px;
-      padding: 8px 12px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(0, 212, 255, 0.3);
-      font-size: 12px;
-      color: #ffffff;
-    }
-
-    .status-connected {
-      border-color: #00ff88 !important;
-      box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
-    }
-
-    .status-disconnected {
-      border-color: #ff4757 !important;
-      box-shadow: 0 0 15px rgba(255, 71, 87, 0.3);
-    }
-
-    /* Medal Counter (Top Right) */
-    .medal-counter {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 15;
-      background: rgba(10, 10, 10, 0.8);
-      border-radius: 10px;
-      padding: 10px 15px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 215, 0, 0.3);
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
-    }
-
-    .medal-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 2px 0;
-      color: #ffffff;
-      font-weight: 500;
-      font-size: 12px;
-      min-width: 150px;
-    }
-
-    .medal-count {
-      color: #ffd700;
-      font-weight: 700;
-      font-size: 14px;
     }
 
     .controls {
@@ -488,6 +423,37 @@
       60% {
         transform: translateY(-3px);
       }
+    }
+
+    /* Medal Counter (Top Right) */
+    .medal-counter {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 15;
+      background: rgba(10, 10, 10, 0.8);
+      border-radius: 10px;
+      padding: 10px 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    }
+
+    .medal-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 2px 0;
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 12px;
+      min-width: 150px;
+    }
+
+    .medal-count {
+      color: #ffd700;
+      font-weight: 700;
+      font-size: 14px;
     }
 
     /* Medal Shop */
@@ -683,7 +649,7 @@
       color: #ff4757;
     }
 
-    .setup-section {
+    .shop-edit-item {
       background: rgba(20, 20, 30, 0.8);
       border-radius: 8px;
       padding: 15px;
@@ -715,6 +681,18 @@
       font-size: 12px;
     }
 
+    .input-group textarea {
+      resize: vertical;
+      min-height: 40px;
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+      justify-content: center;
+    }
+
     .modal-btn {
       padding: 10px 20px;
       border: none;
@@ -724,29 +702,30 @@
       font-weight: 600;
       font-size: 12px;
       text-transform: uppercase;
-      margin: 5px;
     }
 
-    .primary-btn {
+    .save-btn {
       background: linear-gradient(45deg, #00d4ff, #0099cc);
       color: white;
     }
 
-    .secondary-btn {
-      background: linear-gradient(45deg, #ffd700, #ccaa00);
-      color: #1a1a1a;
+    .cancel-btn {
+      background: linear-gradient(45deg, #ff4757, #cc3333);
+      color: white;
     }
 
-    .code-block {
-      background: rgba(10, 10, 10, 0.9);
-      border: 1px solid rgba(0, 212, 255, 0.3);
-      border-radius: 5px;
-      padding: 10px;
-      font-family: monospace;
-      font-size: 11px;
-      color: #00d4ff;
-      overflow-x: auto;
-      margin: 10px 0;
+    .add-item-btn {
+      background: linear-gradient(45deg, #ffd700, #ccaa00);
+      color: #1a1a1a;
+      margin-bottom: 15px;
+    }
+
+    .delete-btn {
+      background: linear-gradient(45deg, #ff4757, #cc3333);
+      color: white;
+      padding: 5px 10px;
+      font-size: 10px;
+      float: right;
     }
 
     /* Responsive design */
@@ -791,12 +770,6 @@
         right: auto;
         margin-bottom: 10px;
       }
-      .firebase-status {
-        position: relative;
-        top: auto;
-        left: auto;
-        margin-bottom: 10px;
-      }
       .ufo {
         font-size: 40px;
         width: 40px;
@@ -837,34 +810,27 @@
   <div class="ufo ufo2">🛸</div>
   <div class="ufo ufo3">🛸</div>
   
-  <!-- Firebase Status -->
-  <div class="firebase-status" id="firebaseStatus">
-    <span id="statusText">🔌 Setting up Firebase...</span>
-  </div>
-
-  <!-- Medal Counter (Top Right) -->
-  <div class="medal-counter">
-    <div class="medal-item">
-      <span>🏆 Total Earned:</span>
-      <span class="medal-count" id="totalMedals">0</span>
-    </div>
-    <div class="medal-item">
-      <span>🥇 Current:</span>
-      <span class="medal-count" id="currentMedals">0</span>
-    </div>
-  </div>
-  
   <div class="container">
     <h1>VALORANT DEATHMATCH CALENDAR</h1>
-    <div class="subtitle">🔥 Firebase Realtime Sync Edition 🔥</div>
     
     <div class="controls">
       <button id="prevMonth">← PREV MONTH</button>
       <span id="monthLabel"></span>
       <button id="nextMonth">NEXT MONTH →</button>
-      <button id="setupBtn" class="secondary-btn">⚙️ FIREBASE SETUP</button>
     </div>
     
+    <!-- Medal Counter (Top Right) -->
+    <div class="medal-counter">
+      <div class="medal-item">
+        <span>🏆 Total Earned:</span>
+        <span class="medal-count" id="totalMedals">0</span>
+      </div>
+      <div class="medal-item">
+        <span>🥇 Current:</span>
+        <span class="medal-count" id="currentMedals">0</span>
+      </div>
+    </div>
+
     <div class="main-content">
       <!-- Medal Shop (Left Side) -->
       <div class="medal-shop">
@@ -897,115 +863,33 @@
     </div>
   </div>
 
-  <!-- Firebase Setup Modal -->
-  <div id="setupModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>🔥 Firebase Setup Guide</h2>
-      
-      <div class="setup-section">
-        <h3>Step 1: Create Firebase Project</h3>
-        <p>1. Go to <a href="https://console.firebase.google.com" target="_blank" style="color: #00d4ff;">Firebase Console</a></p>
-        <p>2. Click "Create a project"</p>
-        <p>3. Enter project name (e.g., "valorant-calendar")</p>
-        <p>4. Disable Google Analytics (optional)</p>
-        <p>5. Click "Create project"</p>
-      </div>
-
-      <div class="setup-section">
-        <h3>Step 2: Setup Realtime Database</h3>
-        <p>1. In Firebase Console, go to "Realtime Database"</p>
-        <p>2. Click "Create Database"</p>
-        <p>3. Choose location (asia-southeast1 for Japan)</p>
-        <p>4. Start in "test mode" for now</p>
-        <p>5. Database will be created with URL like:</p>
-        <div class="code-block">https://your-project-id-default-rtdb.asia-southeast1.firebasedatabase.app/</div>
-      </div>
-
-      <div class="setup-section">
-        <h3>Step 3: Get Configuration</h3>
-        <p>1. Go to Project Settings (⚙️ icon)</p>
-        <p>2. Scroll down to "Your apps"</p>
-        <p>3. Click "Web" icon (&lt;/&gt;)</p>
-        <p>4. Register app with nickname</p>
-        <p>5. Copy the config object</p>
-      </div>
-
-      <div class="setup-section">
-        <h3>Step 4: Enter Your Config</h3>
-        <div class="input-group">
-          <label>API Key:</label>
-          <input type="text" id="apiKey" placeholder="AIzaSyC...">
-        </div>
-        <div class="input-group">
-          <label>Auth Domain:</label>
-          <input type="text" id="authDomain" placeholder="your-project-id.firebaseapp.com">
-        </div>
-        <div class="input-group">
-          <label>Database URL:</label>
-          <input type="text" id="databaseURL" placeholder="https://your-project-id-default-rtdb.asia-southeast1.firebasedatabase.app/">
-        </div>
-        <div class="input-group">
-          <label>Project ID:</label>
-          <input type="text" id="projectId" placeholder="your-project-id">
-        </div>
-        <div class="input-group">
-          <label>Storage Bucket:</label>
-          <input type="text" id="storageBucket" placeholder="your-project-id.appspot.com">
-        </div>
-        <div class="input-group">
-          <label>Messaging Sender ID:</label>
-          <input type="text" id="messagingSenderId" placeholder="123456789">
-        </div>
-        <div class="input-group">
-          <label>App ID:</label>
-          <input type="text" id="appId" placeholder="1:123456789:web:abc123def456">
-        </div>
-        
-        <button id="connectBtn" class="modal-btn primary-btn">🔥 CONNECT TO FIREBASE</button>
-        <button id="loadDemoBtn" class="modal-btn secondary-btn">📱 USE DEMO MODE</button>
-      </div>
-
-      <div class="setup-section">
-        <h3>📋 Security Rules (Optional)</h3>
-        <p>For production, update Database Rules:</p>
-        <div class="code-block">{
-  "rules": {
-    "calendars": {
-      "$uid": {
-        ".read": "auth != null && auth.uid == $uid",
-        ".write": "auth != null && auth.uid == $uid"
-      }
-    },
-    "public_calendars": {
-      ".read": true,
-      ".write": "auth != null"
-    }
-  }
-}</div>
-      </div>
-    </div>
-  </div>
-
   <!-- Shop Edit Modal -->
   <div id="shopModal" class="modal">
     <div class="modal-content">
-      <span class="close" data-modal="shop">&times;</span>
+      <span class="close">&times;</span>
       <h2>⚙️ EDIT MEDAL SHOP</h2>
-      <button id="addItemBtn" class="modal-btn secondary-btn">+ ADD NEW ITEM</button>
+      <button id="addItemBtn" class="modal-btn add-item-btn">+ ADD NEW ITEM</button>
       <div id="shopEditItems"></div>
-      <div style="text-align: center; margin-top: 15px;">
-        <button id="saveShopBtn" class="modal-btn primary-btn">SAVE CHANGES</button>
-        <button id="cancelShopBtn" class="modal-btn secondary-btn">CANCEL</button>
+      <div class="modal-buttons">
+        <button id="saveShopBtn" class="modal-btn save-btn">SAVE CHANGES</button>
+        <button id="cancelShopBtn" class="modal-btn cancel-btn">CANCEL</button>
       </div>
     </div>
   </div>
 
-  <!-- Firebase SDK -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-app-compat.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-database-compat.min.js"></script>
-
   <script>
+    // Electron IPC (if available)
+    let isElectron = false;
+    let ipcRenderer = null;
+    
+    try {
+      ipcRenderer = require('electron').ipcRenderer;
+      isElectron = true;
+    } catch (e) {
+      // Running in browser, use localStorage
+      isElectron = false;
+    }
+
     // Create floating particles
     function createParticles() {
       const particlesContainer = document.getElementById('particles');
@@ -1039,7 +923,6 @@
     createParticles();
     createStars();
 
-    // DOM Elements
     const calendarEl = document.getElementById("calendar");
     const monthLabel = document.getElementById("monthLabel");
     const monthWinsEl = document.getElementById("monthWins");
@@ -1048,156 +931,105 @@
     const totalMedalsEl = document.getElementById("totalMedals");
     const currentMedalsEl = document.getElementById("currentMedals");
     const shopItemsEl = document.getElementById("shopItems");
-    const firebaseStatusEl = document.getElementById("firebaseStatus");
-    const statusTextEl = document.getElementById("statusText");
-
     let current = new Date();
-    let firebase = null;
-    let database = null;
-    let isConnected = false;
 
-    // Local data (fallback)
-    let localData = {
-      stampedDays: {},
-      currentMedals: 0,
-      totalMedalsEarned: 0,
-      shopItems: [
-        {
-          name: "Game Break",
-          description: "Take a guilt-free 1-day break from gaming",
-          cost: 7,
-          id: 1
-        },
-        {
-          name: "Favorite Snack",
-          description: "Buy your favorite snack as a reward",
-          cost: 15,
-          id: 2
-        },
-        {
-          name: "New Game",
-          description: "Purchase a new game you've been wanting",
-          cost: 30,
-          id: 3
-        },
-        {
-          name: "Gaming Setup Upgrade",
-          description: "Upgrade your gaming setup (mouse, keyboard, etc.)",
-          cost: 50,
-          id: 4
-        }
-      ]
-    };
-
-    // Firebase Configuration
-    let firebaseConfig = null;
-
-    // Initialize Firebase
-    function initializeFirebase(config) {
-      try {
-        firebaseConfig = config;
-        
-        if (firebase) {
-          firebase.app().delete();
-        }
-        
-        firebase = window.firebase;
-        firebase.initializeApp(config);
-        database = firebase.database();
-        
-        // Test connection
-        database.ref('.info/connected').on('value', (snapshot) => {
-          isConnected = snapshot.val();
-          updateConnectionStatus();
-          
-          if (isConnected) {
-            loadDataFromFirebase();
-            setupRealtimeListeners();
-          }
-        });
-        
-        statusTextEl.textContent = '🔥 Connected to Firebase!';
-        firebaseStatusEl.classList.add('status-connected');
-        firebaseStatusEl.classList.remove('status-disconnected');
-        
-        return true;
-      } catch (error) {
-        console.error('Firebase initialization error:', error);
-        statusTextEl.textContent = '❌ Firebase connection failed';
-        firebaseStatusEl.classList.add('status-disconnected');
-        firebaseStatusEl.classList.remove('status-connected');
-        return false;
+    // Data storage variables
+    let stampedDays = {};
+    let currentMedals = 0;
+    let totalMedalsEarned = 0;
+    let shopItems = [
+      {
+        name: "Game Break",
+        description: "Take a guilt-free 1-day break from gaming",
+        cost: 7,
+        id: 1
+      },
+      {
+        name: "Favorite Snack",
+        description: "Buy your favorite snack as a reward",
+        cost: 15,
+        id: 2
+      },
+      {
+        name: "New Game",
+        description: "Purchase a new game you've been wanting",
+        cost: 30,
+        id: 3
+      },
+      {
+        name: "Gaming Setup Upgrade",
+        description: "Upgrade your gaming setup (mouse, keyboard, etc.)",
+        cost: 50,
+        id: 4
       }
-    }
+    ];
 
-    function updateConnectionStatus() {
-      if (isConnected) {
-        statusTextEl.textContent = '🟢 Firebase Connected';
-        firebaseStatusEl.classList.add('status-connected');
-        firebaseStatusEl.classList.remove('status-disconnected');
-      } else {
-        statusTextEl.textContent = '🔴 Firebase Disconnected';
-        firebaseStatusEl.classList.add('status-disconnected');
-        firebaseStatusEl.classList.remove('status-connected');
-      }
-    }
-
-    // Load data from Firebase
-    function loadDataFromFirebase() {
-      if (!database) return;
-      
-      database.ref('calendar-data').once('value')
-        .then((snapshot) => {
-          const data = snapshot.val();
+    // Data loading/saving functions
+    async function loadData() {
+      if (isElectron && ipcRenderer) {
+        // Electron: Load from file
+        try {
+          const data = await ipcRenderer.invoke('load-data');
           if (data) {
-            localData = { ...localData, ...data };
-            updateAllDisplays();
+            stampedDays = data.stampedDays || {};
+            currentMedals = data.currentMedals || 0;
+            totalMedalsEarned = data.totalMedalsEarned || 0;
+            shopItems = data.shopItems || shopItems;
           }
-        })
-        .catch((error) => {
-          console.error('Error loading data:', error);
-        });
-    }
-
-    // Save data to Firebase
-    function saveDataToFirebase() {
-      if (!database || !isConnected) return;
-      
-      database.ref('calendar-data').set(localData)
-        .catch((error) => {
-          console.error('Error saving data:', error);
-        });
-    }
-
-    // Setup realtime listeners
-    function setupRealtimeListeners() {
-      if (!database) return;
-      
-      database.ref('calendar-data').on('value', (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-          localData = { ...localData, ...data };
-          updateAllDisplays();
+        } catch (error) {
+          console.log('First time loading or error:', error);
         }
-      });
+      } else {
+        // Browser: Load from localStorage
+        try {
+          const data = localStorage.getItem('valorantCalendarData');
+          if (data) {
+            const parsed = JSON.parse(data);
+            stampedDays = parsed.stampedDays || {};
+            currentMedals = parsed.currentMedals || 0;
+            totalMedalsEarned = parsed.totalMedalsEarned || 0;
+            shopItems = parsed.shopItems || shopItems;
+          }
+        } catch (error) {
+          console.log('Error loading from localStorage:', error);
+        }
+      }
     }
 
-    // Update all displays
-    function updateAllDisplays() {
-      updateMedalDisplay();
-      renderShop();
-      renderCalendar(current.getFullYear(), current.getMonth());
+    async function saveData() {
+      const data = {
+        stampedDays,
+        currentMedals,
+        totalMedalsEarned,
+        shopItems
+      };
+
+      if (isElectron && ipcRenderer) {
+        // Electron: Save to file
+        try {
+          await ipcRenderer.invoke('save-data', data);
+        } catch (error) {
+          console.error('Error saving to file:', error);
+        }
+      } else {
+        // Browser: Save to localStorage
+        try {
+          localStorage.setItem('valorantCalendarData', JSON.stringify(data));
+        } catch (error) {
+          console.error('Error saving to localStorage:', error);
+        }
+      }
     }
 
     function updateMedalDisplay() {
-      totalMedalsEl.textContent = localData.totalMedalsEarned;
-      currentMedalsEl.textContent = localData.currentMedals;
+      totalMedalsEl.textContent = totalMedalsEarned;
+      currentMedalsEl.textContent = currentMedals;
     }
 
     function renderShop() {
       shopItemsEl.innerHTML = '';
-      localData.shopItems.forEach(item => {
-        const canAfford = localData.currentMedals >= item.cost;
+      shopItems.forEach(item => {
+        const canAfford = currentMedals >= item.cost;
         const itemEl = document.createElement('div');
         itemEl.className = 'shop-item';
         itemEl.innerHTML = `
@@ -1215,211 +1047,56 @@
     }
 
     function buyItem(itemId) {
-      const item = localData.shopItems.find(i => i.id === itemId);
-      if (item && localData.currentMedals >= item.cost) {
+      const item = shopItems.find(i => i.id === itemId);
+      if (item && currentMedals >= item.cost) {
         if (confirm(`Purchase "${item.name}" for ${item.cost} medals?`)) {
-          localData.currentMedals -= item.cost;
+          currentMedals -= item.cost;
           updateMedalDisplay();
           renderShop();
-          saveDataToFirebase();
+          saveData();
           alert(`🎉 You purchased "${item.name}"! Enjoy your reward!`);
         }
       }
     }
 
-    function calculateStats(year, month) {
-      const keyPrefix = `${year}-${month}`;
-      const currentMonthWins = (localData.stampedDays[keyPrefix] || []).length;
-      
-      // Calculate best month
-      let bestMonth = '';
-      let maxWins = 0;
-      for (const [key, wins] of Object.entries(localData.stampedDays)) {
-        if (wins.length > maxWins) {
-          maxWins = wins.length;
-          const [y, m] = key.split('-');
-          bestMonth = `${y}年${parseInt(m) + 1}月 (${maxWins}勝)`;
-        }
-      }
-
-      // Calculate current win streak
-      const today = new Date();
-      let streak = 0;
-      if (year === today.getFullYear() && month === today.getMonth()) {
-        const todayDate = today.getDate();
-        const stamped = localData.stampedDays[keyPrefix] || [];
-        for (let day = todayDate; day >= 1; day--) {
-          if (stamped.includes(day)) {
-            streak++;
-          } else {
-            break;
-          }
-        }
-      }
-
-      monthWinsEl.textContent = currentMonthWins;
-      winStreakEl.textContent = streak;
-      bestMonthEl.textContent = bestMonth || '-';
-    }
-
-    function renderCalendar(year, month) {
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-      const startDay = new Date(year, month, 1).getDay();
-      
-      let table = '<div class="calendar-title">' + year + '年 ' + (month + 1) + '月</div>';
-      table += '<table><tr>';
-      
-      const weekDays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-      for (let d of weekDays) table += `<th>${d}</th>`;
-      table += "</tr>";
-
-      let dayCount = 0;
-      const keyPrefix = `${year}-${month}`;
-      const stamped = localData.stampedDays[keyPrefix] || [];
-
-      // Always create 6 rows for consistent height
-      for (let week = 0; week < 6; week++) {
-        table += "<tr>";
-        for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
-          if (week === 0 && dayOfWeek < startDay) {
-            table += "<td></td>";
-            dayCount++;
-          } else {
-            const day = dayCount - startDay + 1;
-            if (day <= daysInMonth) {
-              const isStamped = stamped.includes(day);
-              table += `<td data-day="${day}" class="${isStamped ? 'stamped' : ''}">${day}${isStamped ? '<span class="medal">🥇</span>' : ''}</td>`;
-            } else {
-              table += "<td></td>";
-            }
-            dayCount++;
-          }
-        }
-        table += "</tr>";
-      }
-      
-      table += "</table>";
-      calendarEl.innerHTML = table;
-      monthLabel.textContent = `${year}年 ${month + 1}月`;
-
-      // Add click handlers
-      document.querySelectorAll("td[data-day]").forEach((td) => {
-        const day = Number(td.dataset.day);
-        td.addEventListener("click", () => {
-          if (!localData.stampedDays[keyPrefix]) localData.stampedDays[keyPrefix] = [];
-          const stamped = localData.stampedDays[keyPrefix];
-          
-          if (td.classList.contains("stamped")) {
-            td.innerHTML = day;
-            td.classList.remove("stamped");
-            const index = stamped.indexOf(day);
-            if (index !== -1) {
-              stamped.splice(index, 1);
-              localData.currentMedals--;
-              localData.totalMedalsEarned--;
-            }
-          } else {
-            td.innerHTML = `${day}<span class="medal">🥇</span>`;
-            td.classList.add("stamped");
-            stamped.push(day);
-            localData.currentMedals++;
-            localData.totalMedalsEarned++;
-          }
-          
-          updateMedalDisplay();
-          renderShop();
-          calculateStats(year, month);
-          saveDataToFirebase();
-        });
-      });
-
-      calculateStats(year, month);
-    }
-
-    // Event Listeners
-    document.getElementById("prevMonth").addEventListener("click", () => {
-      current.setMonth(current.getMonth() - 1);
-      renderCalendar(current.getFullYear(), current.getMonth());
-    });
-
-    document.getElementById("nextMonth").addEventListener("click", () => {
-      current.setMonth(current.getMonth() + 1);
-      renderCalendar(current.getFullYear(), current.getMonth());
-    });
-
-    // Modal handling
-    const setupModal = document.getElementById('setupModal');
-    const shopModal = document.getElementById('shopModal');
-    const setupBtn = document.getElementById('setupBtn');
-    const editShopBtn = document.getElementById('editShopBtn');
-
-    setupBtn.addEventListener('click', () => {
-      setupModal.style.display = 'block';
-    });
-
-    editShopBtn.addEventListener('click', openShopEditor);
-
-    // Close modals
-    document.querySelectorAll('.close').forEach(closeBtn => {
-      closeBtn.addEventListener('click', (e) => {
-        if (e.target.dataset.modal === 'shop') {
-          closeShopEditor();
-        } else {
-          setupModal.style.display = 'none';
-        }
-      });
-    });
-
-    window.addEventListener('click', (e) => {
-      if (e.target === setupModal) setupModal.style.display = 'none';
-      if (e.target === shopModal) closeShopEditor();
-    });
-
-    // Firebase setup
-    document.getElementById('connectBtn').addEventListener('click', () => {
-      const config = {
-        apiKey: document.getElementById('apiKey').value,
-        authDomain: document.getElementById('authDomain').value,
-        databaseURL: document.getElementById('databaseURL').value,
-        projectId: document.getElementById('projectId').value,
-        storageBucket: document.getElementById('storageBucket').value,
-        messagingSenderId: document.getElementById('messagingSenderId').value,
-        appId: document.getElementById('appId').value
-      };
-
-      if (initializeFirebase(config)) {
-        setupModal.style.display = 'none';
-      }
-    });
-
-    document.getElementById('loadDemoBtn').addEventListener('click', () => {
-      // Demo mode - use local storage only
-      statusTextEl.textContent = '📱 Demo Mode (Local Only)';
-      firebaseStatusEl.classList.remove('status-connected', 'status-disconnected');
-      setupModal.style.display = 'none';
-    });
-
     // Shop editing functionality
+    const modal = document.getElementById('shopModal');
+    const editShopBtn = document.getElementById('editShopBtn');
+    const closeModal = document.querySelector('.close');
+    const saveShopBtn = document.getElementById('saveShopBtn');
+    const cancelShopBtn = document.getElementById('cancelShopBtn');
+    const addItemBtn = document.getElementById('addItemBtn');
+    const shopEditItemsEl = document.getElementById('shopEditItems');
+
     let tempShopItems = [];
 
+    editShopBtn.addEventListener('click', openShopEditor);
+    closeModal.addEventListener('click', closeShopEditor);
+    cancelShopBtn.addEventListener('click', closeShopEditor);
+    saveShopBtn.addEventListener('click', saveShopChanges);
+    addItemBtn.addEventListener('click', addNewShopItem);
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) closeShopEditor();
+    });
+
     function openShopEditor() {
-      tempShopItems = JSON.parse(JSON.stringify(localData.shopItems));
+      tempShopItems = JSON.parse(JSON.stringify(shopItems));
       renderShopEditor();
-      shopModal.style.display = 'block';
+      modal.style.display = 'block';
     }
 
     function closeShopEditor() {
-      shopModal.style.display = 'none';
+      modal.style.display = 'none';
     }
 
     function renderShopEditor() {
-      const shopEditItemsEl = document.getElementById('shopEditItems');
       shopEditItemsEl.innerHTML = '';
       tempShopItems.forEach((item, index) => {
         const itemEl = document.createElement('div');
-        itemEl.className = 'setup-section';
+        itemEl.className = 'shop-edit-item';
         itemEl.innerHTML = `
-          <button class="modal-btn secondary-btn" onclick="deleteShopItem(${index})" style="float: right; padding: 5px 10px; font-size: 10px;">DELETE</button>
+          <button class="modal-btn delete-btn" onclick="deleteShopItem(${index})">DELETE</button>
           <div class="input-group">
             <label>Item Name:</label>
             <input type="text" value="${item.name}" onchange="updateShopItem(${index}, 'name', this.value)">
@@ -1448,7 +1125,7 @@
       }
     }
 
-    document.getElementById('addItemBtn').addEventListener('click', () => {
+    function addNewShopItem() {
       const newId = Math.max(...tempShopItems.map(i => i.id), 0) + 1;
       tempShopItems.push({
         name: "New Item",
@@ -1457,20 +1134,144 @@
         id: newId
       });
       renderShopEditor();
-    });
+    }
 
-    document.getElementById('saveShopBtn').addEventListener('click', () => {
-      localData.shopItems = tempShopItems;
+    function saveShopChanges() {
+      shopItems = tempShopItems;
       renderShop();
-      saveDataToFirebase();
+      saveData();
       closeShopEditor();
+    }
+
+    function calculateStats(year, month) {
+      const keyPrefix = `${year}-${month}`;
+      const currentMonthWins = (stampedDays[keyPrefix] || []).length;
+      
+      // Calculate best month
+      let bestMonth = '';
+      let maxWins = 0;
+      for (const [key, wins] of Object.entries(stampedDays)) {
+        if (wins.length > maxWins) {
+          maxWins = wins.length;
+          const [y, m] = key.split('-');
+          bestMonth = `${y}年${parseInt(m) + 1}月 (${maxWins}勝)`;
+        }
+      }
+
+      // Calculate current win streak (consecutive days from today backwards)
+      const today = new Date();
+      let streak = 0;
+      if (year === today.getFullYear() && month === today.getMonth()) {
+        const todayDate = today.getDate();
+        const stamped = stampedDays[keyPrefix] || [];
+        for (let day = todayDate; day >= 1; day--) {
+          if (stamped.includes(day)) {
+            streak++;
+          } else {
+            break;
+          }
+        }
+      }
+
+      monthWinsEl.textContent = currentMonthWins;
+      winStreakEl.textContent = streak;
+      bestMonthEl.textContent = bestMonth || '-';
+    }
+
+    function renderCalendar(year, month) {
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const startDay = new Date(year, month, 1).getDay();
+      
+      let table = '<div class="calendar-title">' + year + '年 ' + (month + 1) + '月</div>';
+      table += '<table><tr>';
+      
+      const weekDays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+      for (let d of weekDays) table += `<th>${d}</th>`;
+      table += "</tr>";
+
+      let dayCount = 0;
+      const keyPrefix = `${year}-${month}`;
+      const stamped = stampedDays[keyPrefix] || [];
+
+      // 常に6行分のカレンダーを作成（固定高さのため）
+      for (let week = 0; week < 6; week++) {
+        table += "<tr>";
+        for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
+          if (week === 0 && dayOfWeek < startDay) {
+            // 月の最初の週の空白セル
+            table += "<td></td>";
+            dayCount++;
+          } else {
+            const day = dayCount - startDay + 1;
+            if (day <= daysInMonth) {
+              const isStamped = stamped.includes(day);
+              table += `<td data-day="${day}" class="${isStamped ? 'stamped' : ''}">${day}${isStamped ? '<span class="medal">🥇</span>' : ''}</td>`;
+            } else {
+              // 月の最後の週の空白セル
+              table += "<td></td>";
+            }
+            dayCount++;
+          }
+        }
+        table += "</tr>";
+      }
+      
+      table += "</table>";
+      calendarEl.innerHTML = table;
+      monthLabel.textContent = `${year}年 ${month + 1}月`;
+
+      // Add click handlers
+      document.querySelectorAll("td[data-day]").forEach((td) => {
+        const day = Number(td.dataset.day);
+        td.addEventListener("click", () => {
+          if (!stampedDays[keyPrefix]) stampedDays[keyPrefix] = [];
+          const stamped = stampedDays[keyPrefix];
+          
+          if (td.classList.contains("stamped")) {
+            td.innerHTML = day;
+            td.classList.remove("stamped");
+            const index = stamped.indexOf(day);
+            if (index !== -1) {
+              stamped.splice(index, 1);
+              currentMedals--;
+              totalMedalsEarned--;
+            }
+          } else {
+            td.innerHTML = `${day}<span class="medal">🥇</span>`;
+            td.classList.add("stamped");
+            stamped.push(day);
+            currentMedals++;
+            totalMedalsEarned++;
+          }
+          updateMedalDisplay();
+          renderShop();
+          calculateStats(year, month);
+          saveData();
+        });
+      });
+
+      calculateStats(year, month);
+    }
+
+    document.getElementById("prevMonth").addEventListener("click", () => {
+      current.setMonth(current.getMonth() - 1);
+      renderCalendar(current.getFullYear(), current.getMonth());
     });
 
-    document.getElementById('cancelShopBtn').addEventListener('click', closeShopEditor);
+    document.getElementById("nextMonth").addEventListener("click", () => {
+      current.setMonth(current.getMonth() + 1);
+      renderCalendar(current.getFullYear(), current.getMonth());
+    });
 
-    // Initialize app
-    updateAllDisplays();
+    // Initialize the app
+    async function initApp() {
+      await loadData();
+      updateMedalDisplay();
+      renderShop();
+      renderCalendar(current.getFullYear(), current.getMonth());
+    }
+
+    initApp();
   </script>
 </body>
 </html>
-        
